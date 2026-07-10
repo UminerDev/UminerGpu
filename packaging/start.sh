@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "$0")" && pwd)"
 POOL="${POOL:-}"
 WALLET="${WALLET:-}"
 WORKER="${WORKER:-$(hostname)}"
+PASS="${PASS:-x}"
 
 if [[ -z "$POOL" || -z "$WALLET" ]]; then
     echo "Set POOL and WALLET before starting:" >&2
@@ -14,6 +15,7 @@ fi
 
 exec "$ROOT/uminer" \
     --coin btx \
-    --pool "$POOL" \
-    --worker "$WALLET.$WORKER" \
+    -o "$POOL" \
+    -u "$WALLET.$WORKER" \
+    -p "$PASS" \
     "$@"

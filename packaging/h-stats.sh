@@ -5,7 +5,7 @@ RESP=$(curl -s --max-time 5 "http://$API/stats" 2>/dev/null)
 
 if [[ -z "$RESP" ]]; then
     khs=0
-    stats='{"hs":[],"hs_units":"hs","temp":[],"fan":[],"uptime":0,"ver":"'"${CUSTOM_VERSION:-0.1.0}"'","ar":[0,0],"algo":"btx"}'
+    stats='{"hs":[],"hs_units":"hs","temp":[],"fan":[],"uptime":0,"ver":"'"${CUSTOM_VERSION:-0.1.1}"'","ar":[0,0],"algo":"btx"}'
     echo "$khs"
     echo "$stats"
     exit 0
@@ -23,7 +23,7 @@ rej=$(echo "$RESP" | jq -r '(.shares.rejected // 0) + (.shares.stale // 0)')
 stats=$(jq -nc \
     --argjson hs "$hs" --argjson temp "$temp" --argjson fan "$fan" \
     --argjson uptime "$uptime" --argjson acc "$acc" --argjson rej "$rej" \
-    --arg ver "${CUSTOM_VERSION:-0.1.0}" \
+    --arg ver "${CUSTOM_VERSION:-0.1.1}" \
     '{hs:$hs,hs_units:"hs",temp:$temp,fan:$fan,uptime:$uptime,ver:$ver,ar:[$acc,$rej],algo:"btx"}')
 
 echo "$khs"

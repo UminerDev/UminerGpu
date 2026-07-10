@@ -1,6 +1,7 @@
 {
-  "pool": ["pool.example.com:1234"],
-  "worker": "btx1youraddress.rig1",
+  "pool": ["stratum+tcp://global.btxpool.org:23333"],
+  "user": "btx1yourfulladdress.rig1",
+  "pass": "x",
   "devices": [0],
   "api_port": 4068,
   "watchdog_secs": 120,
