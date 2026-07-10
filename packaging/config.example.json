@@ -1,0 +1,9 @@
+{
+  "pool": ["pool.example.com:1234"],
+  "worker": "btx1youraddress.rig1",
+  "devices": [0],
+  "api_port": 4068,
+  "watchdog_secs": 120,
+  "temp_stop": 0,
+  "fee": 0.0
+}
