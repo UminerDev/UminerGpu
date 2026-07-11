@@ -2,7 +2,7 @@
 
 [[ -z ${CUSTOM_TEMPLATE:-} ]] && CUSTOM_TEMPLATE="${CUSTOM_USER_CONFIG:-}"
 
-conf="--coin btx "
+conf="--coin ${CUSTOM_COIN:-btx} "
 conf+="-o ${CUSTOM_URL:-} "
 conf+="-u ${CUSTOM_TEMPLATE:-} "
 conf+="-p ${CUSTOM_PASS:-x} "

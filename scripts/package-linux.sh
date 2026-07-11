@@ -10,14 +10,16 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BINARY="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
 DIST="$ROOT/dist"
 STAGE="$DIST/uminer"
-ARCHIVE="$DIST/uminer-linux-x86_64-cuda13.tar.gz"
+ARCHIVE="$DIST/uminer-linux-x86_64.tar.gz"
 
 test -x "$BINARY"
 file "$BINARY" | grep -q 'ELF 64-bit LSB.*x86-64'
-"$BINARY" --version | grep -q '^uminer 0.1.3$'
+"$BINARY" --version | grep -q '^uminer 0.1.8$'
 "$BINARY" --help | grep -q -- '--coin <COIN>'
+"$BINARY" --help | grep -q -- 'btx, csd'
 "$BINARY" --help | grep -q -- '--pool <POOL>'
 "$BINARY" --help | grep -q -- '--user <USER>'
+"$BINARY" --coin csd --help | grep -q -- '--self-test'
 
 rm -rf "$STAGE"
 mkdir -p "$STAGE"

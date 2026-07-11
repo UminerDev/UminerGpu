@@ -1,4 +1,5 @@
 {
+  "coin": "btx",
   "pool": ["stratum+tcp://global.btxpool.org:23333"],
   "user": "btx1yourfulladdress.rig1",
   "pass": "x",

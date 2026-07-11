@@ -4,113 +4,134 @@
 
 ## English
 
-Uminer GPU is the official binary release repository for Uminer. The current
-release supports BTX through the unified `--coin btx` command line.
+Uminer GPU is the official binary release repository for Uminer. One executable
+supports both BTX and CSD through `--coin btx` and `--coin csd`.
 
 ### Download
 
-Download the latest Linux package from
-[GitHub Releases](https://github.com/UminerDev/UminerGpu/releases/latest):
-
 ```bash
-wget https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64-cuda13.tar.gz
-tar -xzf uminer-linux-x86_64-cuda13.tar.gz
+wget https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64.tar.gz
+tar -xzf uminer-linux-x86_64.tar.gz
 cd uminer
 sha256sum -c SHA256SUMS
 ```
 
-### Quick Start
+### Minimal Usage (BTX)
+
+Replace `<BTX_ADDRESS>` with a complete BTX address:
 
 ```bash
-./uminer --coin btx \
-  -o stratum+tcp://global.btxpool.org:23333 \
-  -u btx1zq7gn...7zzqd4.rig01 \
-  -p x
+./uminer --coin btx -o stratum+tcp://global.btxpool.org:23333 -u <BTX_ADDRESS>.rig01 -p x
 ```
 
-The address above is masked for display. Replace it with a complete BTX address.
+### Minimal Usage (CSD)
 
-Multi-GPU example:
+Replace the pool endpoint and `<CSD_ADDRESS>` with values supplied by your CSD
+pool. The current CSD user-pool transport accepts plaintext Stratum endpoints:
 
 ```bash
-./uminer --coin btx \
-  -o stratum+tcp://global.btxpool.org:23333 \
-  -u <complete-btx-address>.rig1 \
-  -p x -d 0,1,2,3
+./uminer --coin csd -o stratum+tcp://<CSD_POOL_HOST>:<PORT> -u <CSD_ADDRESS>.rig01 -p x -d 0
 ```
 
-Run `./uminer --help` for pool failover, monitoring, watchdog, temperature and
-performance options. Scan size and the CUDA execution profile are selected
-automatically by default.
+Run `./uminer --help` for the general BTX options and
+`./uminer --coin csd --help` for CSD options.
 
 ### Requirements
 
 - Linux x86_64
-- NVIDIA GPU and driver 580 or newer
-- glibc 2.39 or newer for v0.1.3
+- glibc 2.30 or newer
+- NVIDIA driver 535 or newer for Turing, Ampere and Ada
+- NVIDIA driver 580.95 or newer for Blackwell
 - No CUDA Toolkit installation is required at runtime
 
-The package contains CUDA code for `sm_80`, `sm_86`, `sm_89`, `sm_90` and
-`sm_120`. RTX 3080 (`sm_86`) and RTX 4090 (`sm_89`) are release-gate tested.
-Other listed architectures are included but have not received the same
-performance qualification.
+CSD includes native GPU code for `sm_75`, `sm_80`, `sm_86`, `sm_89` and
+`sm_120`, plus driver-compatible PTX fallback paths. Release validation covers
+CMP 40HX, CMP 50HX, RTX 3080, RTX 4090 and RTX 5090. BTX regression validation
+was completed on RTX 3080.
 
 ### HiveOS
 
-The archive includes HiveOS integration scripts. Use this custom miner URL:
+Use this custom miner URL:
 
 ```text
-https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64-cuda13.tar.gz
+https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64.tar.gz
 ```
 
-The v0.1.3 binary requires glibc 2.39 and therefore does not run on the current
-HiveOS 20.04 base image. The scripts are included for newer compatible images
-and future lower-glibc builds.
+The package includes HiveOS integration scripts. The default HiveOS template
+uses BTX; set `CUSTOM_COIN=csd` when preparing a CSD flight sheet.
 
-### v0.1.3
+### Known Limitations
 
-- Unified executable: `uminer --coin btx`
-- Standard pool options: `-o/--pool`, `-u/--user`, `-p/--pass`, `-d/--devices`
-- Supports `stratum+tcp://host:port`; legacy `--worker` remains compatible
-- Architecture-aware Ampere and Ada CUDA profiles
-- Automatic scan sizing enabled by default
-- Multi-GPU, pool failover, local API, watchdog and share verification
-- Supports driver-only systems that expose `libcuda.so.1`
-- Development fee disabled by default
+- CSD user-pool connections do not yet support native TLS URLs.
+- CSD currently runs one GPU per process and does not yet provide automatic
+  pool failover/reconnect. Use a distinct worker name for each process.
+- The v0.1.8 public asset is Linux-only.
 
-Release assets include `SHA256SUMS`. Only download binaries from this repository
-and verify the checksum before execution.
+Development fee is disabled by default. Release assets include SHA-256
+checksums. Only download binaries from this repository and verify them before
+execution.
 
 ## 繁體中文
 
-Uminer GPU 是 Uminer 的官方二進位發佈儲存庫。目前版本透過統一命令
-`uminer --coin btx` 支援 BTX。
+Uminer GPU 是 Uminer 的官方二進位發佈儲存庫。單一執行檔透過
+`--coin btx` 與 `--coin csd` 同時支援 BTX 和 CSD。
 
 ### 下載與校驗
 
 ```bash
-wget https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64-cuda13.tar.gz
-tar -xzf uminer-linux-x86_64-cuda13.tar.gz
+wget https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64.tar.gz
+tar -xzf uminer-linux-x86_64.tar.gz
 cd uminer
 sha256sum -c SHA256SUMS
 ```
 
-### 快速啟動
+### 最簡使用方式（BTX）
+
+請將 `<BTX_ADDRESS>` 替換為完整的 BTX 地址：
 
 ```bash
-./uminer --coin btx \
-  -o stratum+tcp://global.btxpool.org:23333 \
-  -u btx1zq7gn...7zzqd4.rig01 \
-  -p x
+./uminer --coin btx -o stratum+tcp://global.btxpool.org:23333 -u <BTX_ADDRESS>.rig01 -p x
 ```
 
-上方地址已隱藏中間字元，實際挖礦必須替換為完整 BTX 地址。
+### 最簡使用方式（CSD）
 
-執行環境：Linux x86_64、NVIDIA 580 及以上驅動、glibc 2.39 及以上。
-執行時不需要安裝 CUDA Toolkit。RTX 3080 與 RTX 4090 已完成發佈驗收。
+請使用 CSD 礦池提供的節點，並將 `<CSD_ADDRESS>` 替換為完整地址。
+目前 CSD 使用者礦池傳輸接受明文 Stratum 節點：
 
-預設會自動選擇 CUDA 執行配置和掃描量，一般不需要手動設定
-`scan/grid/chunk`。v0.1.1 預設不啟用開發費。
+```bash
+./uminer --coin csd -o stratum+tcp://<CSD_POOL_HOST>:<PORT> -u <CSD_ADDRESS>.rig01 -p x -d 0
+```
 
-已知限制：v0.1.3 基於 Ubuntu 24.04 建置，需要 glibc 2.39，暫不相容
-HiveOS 20.04 等較舊系統；本版本只支援明文 `stratum+tcp://`。
+一般 BTX 參數請執行 `./uminer --help`；CSD 參數請執行
+`./uminer --coin csd --help`。
+
+### 執行需求
+
+- Linux x86_64
+- glibc 2.30 或更新版本
+- Turing、Ampere 與 Ada 需 NVIDIA 535 或更新驅動
+- Blackwell 需 NVIDIA 580.95 或更新驅動
+- 執行時不需安裝 CUDA Toolkit
+
+CSD 包含 `sm_75`、`sm_80`、`sm_86`、`sm_89` 與 `sm_120` 原生 GPU 程式，
+並提供與驅動相容的 PTX 備援路徑。發佈驗證已覆蓋 CMP 40HX、
+CMP 50HX、RTX 3080、RTX 4090 與 RTX 5090；BTX 已在 RTX 3080 完成回歸驗證。
+
+### HiveOS
+
+```text
+https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64.tar.gz
+```
+
+壓縮包包含 HiveOS 整合腳本。預設範本使用 BTX；準備 CSD flight sheet
+時請設定 `CUSTOM_COIN=csd`。
+
+### 已知限制
+
+- CSD 使用者礦池連線尚不支援原生 TLS URL。
+- CSD 目前每個進程使用一張 GPU，尚未提供自動礦池切換/重連。
+  每個進程請使用不同的 worker 名稱。
+- v0.1.8 公開資產僅提供 Linux 版本。
+
+開發者費用預設為關閉。發佈資產提供 SHA-256 校驗值；請僅從本儲存庫
+下載並在執行前完成校驗。
