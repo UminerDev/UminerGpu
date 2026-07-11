@@ -15,15 +15,9 @@ jobs:
       - name: Check out release metadata
         uses: actions/checkout@v4
 
-      - name: Check out release assets
-        uses: actions/checkout@v4
-        with:
-          ref: release-assets/${{ github.ref_name }}
-          path: release-assets
-
       - name: Verify assets
         run: |
-          cd release-assets
+          cd dist
           sha256sum -c SHA256SUMS
 
       - name: Publish GitHub Release
@@ -31,8 +25,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${GITHUB_REF_NAME}" \
-            release-assets/uminer-linux-x86_64-cuda13.tar.gz \
-            release-assets/SHA256SUMS \
+            dist/uminer-linux-x86_64-cuda13.tar.gz \
+            dist/SHA256SUMS \
             --verify-tag \
             --title "Uminer GPU ${GITHUB_REF_NAME}" \
             --notes-file "release-notes/${GITHUB_REF_NAME}.md"
