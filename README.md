@@ -47,7 +47,7 @@ automatically by default.
 
 - Linux x86_64
 - NVIDIA GPU and driver 580 or newer
-- glibc 2.39 or newer for v0.1.1
+- glibc 2.39 or newer for v0.1.3
 - No CUDA Toolkit installation is required at runtime
 
 The package contains CUDA code for `sm_80`, `sm_86`, `sm_89`, `sm_90` and
@@ -63,11 +63,11 @@ The archive includes HiveOS integration scripts. Use this custom miner URL:
 https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64-cuda13.tar.gz
 ```
 
-The v0.1.1 binary requires glibc 2.39 and therefore does not run on the current
+The v0.1.3 binary requires glibc 2.39 and therefore does not run on the current
 HiveOS 20.04 base image. The scripts are included for newer compatible images
 and future lower-glibc builds.
 
-### v0.1.1
+### v0.1.3
 
 - Unified executable: `uminer --coin btx`
 - Standard pool options: `-o/--pool`, `-u/--user`, `-p/--pass`, `-d/--devices`
@@ -112,5 +112,5 @@ sha256sum -c SHA256SUMS
 預設會自動選擇 CUDA 執行配置和掃描量，一般不需要手動設定
 `scan/grid/chunk`。v0.1.1 預設不啟用開發費。
 
-已知限制：v0.1.1 基於 Ubuntu 24.04 建置，需要 glibc 2.39，暫不相容
+已知限制：v0.1.3 基於 Ubuntu 24.04 建置，需要 glibc 2.39，暫不相容
 HiveOS 20.04 等較舊系統；本版本只支援明文 `stratum+tcp://`。
