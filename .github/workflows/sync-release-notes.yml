@@ -1,0 +1,31 @@
+name: Sync release notes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "release-notes/v*.md"
+      - ".github/workflows/sync-release-notes.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out release notes
+        uses: actions/checkout@v4
+
+      - name: Update published release pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for notes in release-notes/v*.md; do
+            tag="$(basename "$notes" .md)"
+            if gh release view "$tag" >/dev/null 2>&1; then
+              gh release edit "$tag" --notes-file "$notes"
+            fi
+          done
