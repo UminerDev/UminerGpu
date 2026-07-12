@@ -49,7 +49,7 @@ handles bounded submit routing, reconnect and configured-pool failover at proces
 
 ### Developer Fee
 
-Version 0.1.14 is an active-fee testing release: BTX is 2% and CSD is 3%. The policy is compiled
+Version 0.1.15 is an active-fee testing release: BTX is 2% and CSD is 3%. The policy is compiled
 per coin and cannot be reduced by CLI. A GPU changes to developer work only after a trusted Fee
 route has connected, authorized and supplied a valid job; otherwise user mining continues and the
 missed window is not recovered. The user-pool session remains connected during a Fee window.
@@ -59,7 +59,7 @@ missed window is not recovered. The user-pool session remains connected during a
 - Linux asset only; Windows is not included.
 - BTX and CSD are the commercial algorithms. Pearl remains an experimental workspace path and is
   not part of the release.
-- v0.1.14 is published under an explicit testing-stage exception. Long-duration production
+- v0.1.15 is published under an explicit testing-stage exception. Long-duration production
   qualification is continuing and is not claimed by this release.
 
 ## 繁體中文
@@ -107,7 +107,7 @@ sha256sum -c SHA256SUMS
 
 ### 開發者費用
 
-v0.1.14 是啟用 Fee 的測試版：BTX 2%、CSD 3%。費率按幣種固化，CLI 無法下調。
+v0.1.15 是啟用 Fee 的測試版：BTX 2%、CSD 3%。費率按幣種固化，CLI 無法下調。
 只有當受信任 Fee 路由已連線、授權並取得有效任務後，GPU 才會切換；否則使用者挖礦
 持續進行，該時間窗不追補。Fee 時間窗內使用者礦池連線保持在線。
 
@@ -115,4 +115,4 @@ v0.1.14 是啟用 Fee 的測試版：BTX 2%、CSD 3%。費率按幣種固化，C
 
 - 僅提供 Linux，不含 Windows 產物。
 - BTX/CSD 為商業支援算法；Pearl 仍是實驗路徑，不進入本發佈。
-- v0.1.14 根據測試階段特例直接發佈；生產級長時穩定驗收仍在進行，本版不宣稱已完成。
+- v0.1.15 根據測試階段特例直接發佈；生產級長時穩定驗收仍在進行，本版不宣稱已完成。
