@@ -1,3 +1,3 @@
-a2f808c3e83ccbead1b0c7b233dd094aeb183ea72cc832ab80a2dff4c2a5ec75  uminer-0.1.17-linux-x86_64.tar.gz
-7e5989633c3eb98b629c25d26c754e0cbff35887dc99d9dfe3de0af7757a5411  PROVENANCE.intoto.json
+87bb83275ec4fedad61c104b87ecfbea92e7ce40fa62a7209b22f13fbb278517  uminer-0.1.18-linux-x86_64.tar.gz
+20f9f07fc64a31eb3ebd6402695e9ffb7c9fa45c103de333e91ff3add5019179  PROVENANCE.intoto.json
 3a686788f5d7ebf77d69cc858b841243f54941dbd3475ff43bb5879e9cb401f4  RELEASE-PUBLIC-KEY.pem

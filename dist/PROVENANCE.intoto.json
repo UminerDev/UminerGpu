@@ -2,9 +2,9 @@
   "_type": "https://in-toto.io/Statement/v1",
   "subject": [
     {
-      "name": "uminer-0.1.17-linux-x86_64.tar.gz",
+      "name": "uminer-0.1.18-linux-x86_64.tar.gz",
       "digest": {
-        "sha256": "a2f808c3e83ccbead1b0c7b233dd094aeb183ea72cc832ab80a2dff4c2a5ec75"
+        "sha256": "87bb83275ec4fedad61c104b87ecfbea92e7ce40fa62a7209b22f13fbb278517"
       }
     }
   ],
@@ -19,7 +19,7 @@
         {
           "uri": "urn:uminer:private-source",
           "digest": {
-            "gitCommit": "90c7d8bd3d1643a6f24e2a15afa2316cd2ec24f0"
+            "gitCommit": "c38b91ca1086e98cef8e75266b00ccad7151dafb"
           }
         }
       ]
