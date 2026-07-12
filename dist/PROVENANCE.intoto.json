@@ -1,0 +1,33 @@
+{
+  "_type": "https://in-toto.io/Statement/v1",
+  "subject": [
+    {
+      "name": "uminer-0.1.14-linux-x86_64.tar.gz",
+      "digest": {
+        "sha256": "4b497ebe63540a1d87cca79730e972845c2fa59d46e5e424e212d1580819d82f"
+      }
+    }
+  ],
+  "predicateType": "https://slsa.dev/provenance/v1",
+  "predicate": {
+    "buildDefinition": {
+      "buildType": "urn:uminer:testing-stage-direct-release",
+      "externalParameters": {
+        "qualification_exception": "testing-stage-direct-release-2026-07-12"
+      },
+      "resolvedDependencies": [
+        {
+          "uri": "urn:uminer:private-source",
+          "digest": {
+            "gitCommit": "36edccc7f3f6529ebd3fb562cd9708e77b8587d6"
+          }
+        }
+      ]
+    },
+    "runDetails": {
+      "builder": {
+        "id": "urn:uminer:3080-clean-docker-build"
+      }
+    }
+  }
+}

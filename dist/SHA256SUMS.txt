@@ -1,0 +1,7 @@
+4b497ebe63540a1d87cca79730e972845c2fa59d46e5e424e212d1580819d82f  uminer-0.1.14-linux-x86_64.tar.gz
+ccb9d7171f58d37843cfe6f6e3e3279faa7e7ce90b9e2a799a9dfc4f574cd752  uminer-linux-x86_64-cuda13.tar.gz
+ccb9d7171f58d37843cfe6f6e3e3279faa7e7ce90b9e2a799a9dfc4f574cd752  uminer-linux-x86_64.tar.gz
+fbf18e0df6336a361fb30fef32ab8045bbddddbc4f8fc12e5be93bc363874bb9  uminer-0.1.14-linux-x86_64.tar.gz.sig
+d1da917122fa068c8d28ed10bba35f9e5cb21b48bc94d429493e9fbcc4cf0146  PROVENANCE.intoto.json
+039b734710d39a4654497d80530ff080ee38cbe2fd5d15d770b4acbdd55c4008  PROVENANCE.intoto.json.sig
+3a686788f5d7ebf77d69cc858b841243f54941dbd3475ff43bb5879e9cb401f4  RELEASE-PUBLIC-KEY.pem

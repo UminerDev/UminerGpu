@@ -14,7 +14,7 @@ ARCHIVE="$DIST/uminer-linux-x86_64.tar.gz"
 
 test -x "$BINARY"
 file "$BINARY" | grep -q 'ELF 64-bit LSB.*x86-64'
-"$BINARY" --version | grep -q '^uminer 0.1.8$'
+"$BINARY" --version | grep -q '^uminer 0.1.14$'
 "$BINARY" --help | grep -q -- '--coin <COIN>'
 "$BINARY" --help | grep -q -- 'btx, csd'
 "$BINARY" --help | grep -q -- '--pool <POOL>'

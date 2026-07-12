@@ -4,8 +4,8 @@
 
 ## English
 
-Uminer GPU is the official binary release repository for Uminer. One executable
-supports both BTX and CSD through `--coin btx` and `--coin csd`.
+Uminer GPU is the official binary release repository for the proprietary UMINER NVIDIA GPU miner.
+One `uminer` executable supports BTX and CSD through `--coin btx` and `--coin csd`.
 
 ### Download
 
@@ -16,65 +16,56 @@ cd uminer
 sha256sum -c SHA256SUMS
 ```
 
-### Minimal Usage (BTX)
-
-Replace `<BTX_ADDRESS>` with a complete BTX address:
+### Minimal Usage
 
 ```bash
+# BTX
 ./uminer --coin btx -o stratum+tcp://global.btxpool.org:23333 -u <BTX_ADDRESS>.rig01 -p x
+
+# CSD: transport follows the URL; tcp and tls are both supported.
+./uminer --coin csd -o stratum+tls://csd.luckypool.io:443 -u <CSD_ADDRESS>.rig01 -p x
 ```
 
-### Minimal Usage (CSD)
-
-Replace the pool endpoint and `<CSD_ADDRESS>` with values supplied by your CSD
-pool. The current CSD user-pool transport accepts plaintext Stratum endpoints:
-
-```bash
-./uminer --coin csd -o stratum+tcp://<CSD_POOL_HOST>:<PORT> -u <CSD_ADDRESS>.rig01 -p x -d 0
-```
-
-Run `./uminer --help` for the general BTX options and
-`./uminer --coin csd --help` for CSD options.
+Multiple devices may be selected with `-d 0,1,2`. All devices share one user-pool session; UMINER
+handles bounded submit routing, reconnect and configured-pool failover at process scope. Run
+`./uminer --help` for the complete option list.
 
 ### Requirements
 
-- Linux x86_64
-- glibc 2.30 or newer
-- NVIDIA driver 535 or newer for Turing, Ampere and Ada
+- Linux x86_64, glibc 2.30 or newer
+- NVIDIA driver 535 or newer for Turing/CMP, Ampere and Ada
 - NVIDIA driver 580.95 or newer for Blackwell
 - No CUDA Toolkit installation is required at runtime
+- Embedded native SASS: `sm_75`, `sm_80`, `sm_86`, `sm_89`, `sm_120`
 
-CSD includes native GPU code for `sm_75`, `sm_80`, `sm_86`, `sm_89` and
-`sm_120`, plus driver-compatible PTX fallback paths. Release validation covers
-CMP 40HX, CMP 50HX, RTX 3080, RTX 4090 and RTX 5090. BTX regression validation
-was completed on RTX 3080.
+### Operations
 
-### HiveOS
+- A console-only whole-rig/per-GPU status block is printed every 120 seconds by default.
+- INFO logs report new jobs and share outcomes; detail is rate-limited and aggregated after ten
+  events per minute.
+- The local `/stats` and `/metrics` API binds to `127.0.0.1` by default.
+- Auto-Tune state is bounded, versioned and stored per physical GPU UUID when enabled.
+- The package includes HiveOS integration files and SHA-256 checksums.
 
-Use this custom miner URL:
+### Developer Fee
 
-```text
-https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64.tar.gz
-```
+Version 0.1.14 is an active-fee testing release: BTX is 2% and CSD is 3%. The policy is compiled
+per coin and cannot be reduced by CLI. A GPU changes to developer work only after a trusted Fee
+route has connected, authorized and supplied a valid job; otherwise user mining continues and the
+missed window is not recovered. The user-pool session remains connected during a Fee window.
 
-The package includes HiveOS integration scripts. The default HiveOS template
-uses BTX; set `CUSTOM_COIN=csd` when preparing a CSD flight sheet.
+### Current Release Scope
 
-### Known Limitations
-
-- CSD user-pool connections do not yet support native TLS URLs.
-- CSD currently runs one GPU per process and does not yet provide automatic
-  pool failover/reconnect. Use a distinct worker name for each process.
-- The v0.1.8 public asset is Linux-only.
-
-Development fee is disabled by default. Release assets include SHA-256
-checksums. Only download binaries from this repository and verify them before
-execution.
+- Linux asset only; Windows is not included.
+- BTX and CSD are the commercial algorithms. Pearl remains an experimental workspace path and is
+  not part of the release.
+- v0.1.14 is published under an explicit testing-stage exception. Long-duration production
+  qualification is continuing and is not claimed by this release.
 
 ## 繁體中文
 
-Uminer GPU 是 Uminer 的官方二進位發佈儲存庫。單一執行檔透過
-`--coin btx` 與 `--coin csd` 同時支援 BTX 和 CSD。
+Uminer GPU 是閉源 UMINER NVIDIA GPU 礦機的官方二進位發佈儲存庫。單一 `uminer`
+執行檔透過 `--coin btx` 與 `--coin csd` 支援 BTX 和 CSD。
 
 ### 下載與校驗
 
@@ -85,53 +76,43 @@ cd uminer
 sha256sum -c SHA256SUMS
 ```
 
-### 最簡使用方式（BTX）
-
-請將 `<BTX_ADDRESS>` 替換為完整的 BTX 地址：
+### 最簡使用方式
 
 ```bash
+# BTX
 ./uminer --coin btx -o stratum+tcp://global.btxpool.org:23333 -u <BTX_ADDRESS>.rig01 -p x
+
+# CSD：傳輸方式完全由 URL 決定，tcp/tls 均可使用。
+./uminer --coin csd -o stratum+tls://csd.luckypool.io:443 -u <CSD_ADDRESS>.rig01 -p x
 ```
 
-### 最簡使用方式（CSD）
-
-請使用 CSD 礦池提供的節點，並將 `<CSD_ADDRESS>` 替換為完整地址。
-目前 CSD 使用者礦池傳輸接受明文 Stratum 節點：
-
-```bash
-./uminer --coin csd -o stratum+tcp://<CSD_POOL_HOST>:<PORT> -u <CSD_ADDRESS>.rig01 -p x -d 0
-```
-
-一般 BTX 參數請執行 `./uminer --help`；CSD 參數請執行
-`./uminer --coin csd --help`。
+可用 `-d 0,1,2` 選擇多張 GPU。全部 GPU 共用一條使用者礦池連線，提交、重連與備援池切換
+由進程級 runtime 統一管理。完整參數請執行 `./uminer --help`。
 
 ### 執行需求
 
-- Linux x86_64
-- glibc 2.30 或更新版本
-- Turing、Ampere 與 Ada 需 NVIDIA 535 或更新驅動
+- Linux x86_64，glibc 2.30 或更新版本
+- Turing/CMP、Ampere、Ada 需 NVIDIA 535 或更新驅動
 - Blackwell 需 NVIDIA 580.95 或更新驅動
 - 執行時不需安裝 CUDA Toolkit
+- 內嵌 native SASS：`sm_75`、`sm_80`、`sm_86`、`sm_89`、`sm_120`
 
-CSD 包含 `sm_75`、`sm_80`、`sm_86`、`sm_89` 與 `sm_120` 原生 GPU 程式，
-並提供與驅動相容的 PTX 備援路徑。發佈驗證已覆蓋 CMP 40HX、
-CMP 50HX、RTX 3080、RTX 4090 與 RTX 5090；BTX 已在 RTX 3080 完成回歸驗證。
+### 運維能力
 
-### HiveOS
+- 預設每 120 秒輸出一次整機/逐卡狀態摘要。
+- INFO 級記錄新任務與 share 結果；每分鐘超過 10 條後分類聚合。
+- 本機 `/stats` 與 `/metrics` API 預設僅綁定 `127.0.0.1`。
+- Auto-Tune 快取按實體 GPU UUID 與版本隔離，並有容量上限。
+- 壓縮包含 HiveOS 整合檔與 SHA-256 校驗。
 
-```text
-https://github.com/UminerDev/UminerGpu/releases/latest/download/uminer-linux-x86_64.tar.gz
-```
+### 開發者費用
 
-壓縮包包含 HiveOS 整合腳本。預設範本使用 BTX；準備 CSD flight sheet
-時請設定 `CUSTOM_COIN=csd`。
+v0.1.14 是啟用 Fee 的測試版：BTX 2%、CSD 3%。費率按幣種固化，CLI 無法下調。
+只有當受信任 Fee 路由已連線、授權並取得有效任務後，GPU 才會切換；否則使用者挖礦
+持續進行，該時間窗不追補。Fee 時間窗內使用者礦池連線保持在線。
 
-### 已知限制
+### 本版發佈邊界
 
-- CSD 使用者礦池連線尚不支援原生 TLS URL。
-- CSD 目前每個進程使用一張 GPU，尚未提供自動礦池切換/重連。
-  每個進程請使用不同的 worker 名稱。
-- v0.1.8 公開資產僅提供 Linux 版本。
-
-開發者費用預設為關閉。發佈資產提供 SHA-256 校驗值；請僅從本儲存庫
-下載並在執行前完成校驗。
+- 僅提供 Linux，不含 Windows 產物。
+- BTX/CSD 為商業支援算法；Pearl 仍是實驗路徑，不進入本發佈。
+- v0.1.14 根據測試階段特例直接發佈；生產級長時穩定驗收仍在進行，本版不宣稱已完成。
