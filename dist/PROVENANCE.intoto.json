@@ -2,31 +2,31 @@
   "_type": "https://in-toto.io/Statement/v1",
   "subject": [
     {
-      "name": "uminer-0.1.16-linux-x86_64.tar.gz",
+      "name": "uminer-0.1.17-linux-x86_64.tar.gz",
       "digest": {
-        "sha256": "c997487bf3bcc352cabd275654e4d54927ff29768d89ade171d6f177686ce3ae"
+        "sha256": "a2f808c3e83ccbead1b0c7b233dd094aeb183ea72cc832ab80a2dff4c2a5ec75"
       }
     }
   ],
   "predicateType": "https://slsa.dev/provenance/v1",
   "predicate": {
     "buildDefinition": {
-      "buildType": "urn:uminer:manual-qualified-release",
+      "buildType": "urn:uminer:controlled-local-release",
       "externalParameters": {
-        "release": "v0.1.16"
+        "run_id": "local-3080-20260712"
       },
       "resolvedDependencies": [
         {
           "uri": "urn:uminer:private-source",
           "digest": {
-            "gitCommit": "d11bab524d42aababff80df1ab1c80645d5ef586"
+            "gitCommit": "90c7d8bd3d1643a6f24e2a15afa2316cd2ec24f0"
           }
         }
       ]
     },
     "runDetails": {
       "builder": {
-        "id": "urn:uminer:qualified-linux-builder"
+        "id": "urn:uminer:rtx3080-builder"
       }
     }
   }
