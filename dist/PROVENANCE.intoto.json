@@ -2,9 +2,9 @@
   "_type": "https://in-toto.io/Statement/v1",
   "subject": [
     {
-      "name": "uminer-0.1.24-linux-x86_64.tar.gz",
+      "name": "uminer-0.1.25-linux-x86_64.tar.gz",
       "digest": {
-        "sha256": "0640b2b618b5ff5f2011173a9f3dd8e8f54a41d482c496a2932a8f9ff5c1db17"
+        "sha256": "ab04a51e58ff851ed54ed3ef9f38ed3c95cbd3f98c56ffdc292643bc7f490751"
       }
     }
   ],
@@ -13,7 +13,7 @@
     "buildDefinition": {
       "buildType": "urn:uminer:controlled-release",
       "externalParameters": {
-        "version": "0.1.24",
+        "version": "0.1.25",
         "fee_mode": "active",
         "fee_btx_ppm": 20000,
         "fee_csd_ppm": 30000
@@ -22,7 +22,7 @@
         {
           "uri": "urn:uminer:private-source",
           "digest": {
-            "gitCommit": "09ca9cef6ef139d954d0c5b3982a395110e63a4b"
+            "gitCommit": "227a446f29835f4733760edaf0607fbad806e665"
           }
         }
       ]

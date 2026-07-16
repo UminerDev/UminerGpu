@@ -51,13 +51,16 @@ handles bounded submit routing, reconnect and configured-pool failover at proces
 - CSD automatically negotiates an acknowledged pool hashrate-report extension per endpoint.
   Unsupported pools continue mining normally and use share-estimated hashrate. Operators can
   override this with `--hashrate-report-protocol`.
+- Local search-domain protection is always enabled. It resumes known work without rewinding after
+  reconnects or repeated jobs and requires no pool-specific option; third-party pools without a
+  UMINER extension continue to use standard Stratum behavior.
 - The local `/stats` and `/metrics` API binds to `127.0.0.1` by default.
 - Auto-Tune state is bounded, versioned and stored per physical GPU UUID when enabled.
 - The package includes HiveOS integration files and SHA-256 checksums.
 
 ### Developer Fee
 
-Version 0.1.24 is an active-fee testing release: BTX is 2% and CSD is 3%. The policy is compiled
+Version 0.1.25 is an active-fee testing release: BTX is 2% and CSD is 3%. The policy is compiled
 per coin and cannot be reduced by CLI. A GPU changes to developer work only after a trusted Fee
 route has connected, authorized and supplied a valid job; otherwise user mining continues and the
 missed window is not recovered. The user-pool session remains connected during a Fee window.
@@ -67,7 +70,7 @@ missed window is not recovered. The user-pool session remains connected during a
 - Linux asset only; Windows is not included.
 - BTX and CSD are the commercial algorithms. Pearl remains an experimental workspace path and is
   not part of the release.
-- v0.1.24 is published under an explicit testing-stage exception. Long-duration production
+- v0.1.25 is published under an explicit testing-stage exception. Long-duration production
   qualification is continuing and is not claimed by this release.
 
 ## 繁體中文
@@ -116,13 +119,15 @@ cd uminer
 - INFO 級記錄新任務與 share 結果；每分鐘超過 10 條後分類聚合。
 - CSD 會依每個礦池端點自動協商可確認的算力自報擴充；不支援的礦池仍會正常挖礦，並使用 share
   估算算力。運維可用 `--hashrate-report-protocol` 明確覆蓋。
+- 本機搜尋域保護始終啟用；重連或重複任務後會從已知進度繼續而不回捲，且不需要礦池專用選項。
+  未提供 UMINER 擴充的第三方礦池仍使用標準 Stratum 行為。
 - 本機 `/stats` 與 `/metrics` API 預設僅綁定 `127.0.0.1`。
 - Auto-Tune 快取按實體 GPU UUID 與版本隔離，並有容量上限。
 - 壓縮包含 HiveOS 整合檔與 SHA-256 校驗。
 
 ### 開發者費用
 
-v0.1.24 是啟用 Fee 的測試版：BTX 2%、CSD 3%。費率按幣種固化，CLI 無法下調。
+v0.1.25 是啟用 Fee 的測試版：BTX 2%、CSD 3%。費率按幣種固化，CLI 無法下調。
 只有當受信任 Fee 路由已連線、授權並取得有效任務後，GPU 才會切換；否則使用者挖礦
 持續進行，該時間窗不追補。Fee 時間窗內使用者礦池連線保持在線。
 
@@ -130,4 +135,4 @@ v0.1.24 是啟用 Fee 的測試版：BTX 2%、CSD 3%。費率按幣種固化，C
 
 - 僅提供 Linux，不含 Windows 產物。
 - BTX/CSD 為商業支援算法；Pearl 仍是實驗路徑，不進入本發佈。
-- v0.1.24 根據測試階段特例直接發佈；生產級長時穩定驗收仍在進行，本版不宣稱已完成。
+- v0.1.25 根據測試階段特例直接發佈；生產級長時穩定驗收仍在進行，本版不宣稱已完成。
